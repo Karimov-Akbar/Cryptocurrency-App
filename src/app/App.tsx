@@ -1,13 +1,16 @@
 import '@/app/styles/reset.css';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from "./providers/routers/AppRouter";
+import { CoinsProvider } from './providers/CoinsContext';
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <CoinsProvider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </CoinsProvider>
   )
 }
 

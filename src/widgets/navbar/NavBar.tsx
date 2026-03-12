@@ -8,9 +8,11 @@ type NavBarProps = {
     subtitle?: string;
     showSearchInput?: boolean;
     showBackButon?: boolean;
+    onSearchChange?: (value: string) => void;
+    onSearchSubmit?: () => void;
 }
 
-const NavBar = ({ title = 'Dashboard', subtitle = 'Track your crypto investments', showSearchInput = false, showBackButon = false}: NavBarProps) => {
+const NavBar = ({ title = 'Dashboard', subtitle = 'Track your crypto investments', showSearchInput = false, showBackButon = false, onSearchChange, onSearchSubmit }: NavBarProps) => {
     const navigate = useNavigate();
     return(
         <nav className="nav">
@@ -26,7 +28,12 @@ const NavBar = ({ title = 'Dashboard', subtitle = 'Track your crypto investments
                 {showSearchInput?(
                     <div className="nav__search">
                         <img src={search} alt="Search" />
-                        <input type="text" placeholder='Search Cryptocurrency'/>
+                        <input 
+                            type="text" 
+                            placeholder='Search Cryptocurrency'
+                            onChange={(e) => onSearchChange?.(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && onSearchSubmit?.()}
+                        />
                     </div>
                 ):(
                     <button className="nav__search-btn" onClick={()=> navigate('/search')}>

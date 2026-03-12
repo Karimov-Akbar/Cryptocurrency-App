@@ -1,15 +1,11 @@
 import './Table.css'
-import { type CoinInfo } from '@/shared/api/cryptoApi'
-import CoinRow from '@/widgets/coinrow/CoinRow'
 import { memo } from 'react';
 
 type TableProps = {
-    coin: CoinInfo;
-    onRefresh: () => void;
-    onDelete: () => void;
+    children: React.ReactNode;
 };
 
-const Table = memo(({coin, onRefresh, onDelete}: TableProps) =>{
+const Table = memo(({children}: TableProps) =>{
 
     return(
         <table className='table'>
@@ -22,11 +18,7 @@ const Table = memo(({coin, onRefresh, onDelete}: TableProps) =>{
                 </tr>
             </thead>
                 <tbody>
-                    <CoinRow
-                        coin={coin}
-                        onRefresh={onRefresh}
-                        onDelete={onDelete}
-                    />
+                    {children}
                 </tbody>
         </table>
     );

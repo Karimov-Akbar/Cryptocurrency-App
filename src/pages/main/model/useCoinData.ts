@@ -1,30 +1,23 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useState, useEffect, useCallback } from 'react';
-import { getCoinData, type CoinInfo } from '@/shared/api/cryptoApi';
+import { getCoinData } from '@/shared/api/cryptoApi';
+import { useCoins } from '@/app/providers/CoinsContext';
 
 export const useCoinData = () => {
-    const [coin, setCoin] = useState<CoinInfo | null>(null);
+    const { coins, updateCoin } = useCoins();
     const [countDown, setCountDown] = useState(10);
 
-    const fetchCoin = useCallback(async () => {
-        const data = await getCoinData('DOGE');
-        setCoin(prev => {
-            if (prev && prev.price === data.price && prev.changePercent === data.changePercent) {
-                return prev;
-            }
-            return data;
-        });
-    }, []);
-
-    const handleDelete = useCallback(() => {
-        setCoin(null);
-    }, []);
+    const fetchAllCoins = useCallback(async () => {
+        for (const coin of coins) {
+            const data = await getCoinData(coin.symbol);
+            if (data) updateCoin(data);
+        }
+        setCountDown(10);
+    }, [coins, updateCoin]);
 
     useEffect(() => {
-        fetchCoin();
         const interval = setInterval(() => {
-            fetchCoin();
-            setCountDown(10);
+            fetchAllCoins();
         }, 10000);
         const timer = setInterval(() => {
             setCountDown(prev => prev > 0 ? prev - 1 : 10);
@@ -33,7 +26,7 @@ export const useCoinData = () => {
             clearInterval(interval);
             clearInterval(timer);
         };
-    }, [fetchCoin]);
+    }, [fetchAllCoins]);
 
-    return { coin, countDown, fetchCoin, handleDelete };
+    return { countDown, fetchAllCoins };
 };

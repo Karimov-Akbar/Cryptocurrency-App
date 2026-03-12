@@ -1,33 +1,13 @@
 import NavBar from '@/widgets/navbar/NavBar';
 import './Search.css'
-import { useState, useEffect, useCallback } from 'react';
-import { searchCoins, type CoinInfo } from '@/shared/api/cryptoApi';
 import { useCoins } from '@/app/providers/CoinsContext';
 import Table from '@/widgets/table/Table';
 import CoinRow from '@/widgets/coinrow/CoinRow';
+import { useSearch } from '../model/useSearch';
 
 const Search = () => {
-    const [query, setQuery] = useState('');
-    const [results, setResults] = useState<CoinInfo[]>([]);
+    const { setQuery, results } = useSearch();
     const { addCoin } = useCoins();
-
-    const handleSearch = useCallback(async (searchQuery: string) => {
-        if (!searchQuery.trim()) {
-            setResults([]);
-            return;
-        }
-        const data = await searchCoins(searchQuery);
-        setResults(data);
-    }, []);
-
-    // Debounce: поиск через 500ms после остановки ввода
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            handleSearch(query);
-        }, 500);
-
-        return () => clearTimeout(timer);
-    }, [query, handleSearch]);
 
     return(
         <div className='container'>

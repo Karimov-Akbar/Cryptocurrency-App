@@ -15,7 +15,7 @@ const Main = () => {
 
     const handleRefresh = useCallback(async (symbol: string) => {
         const data = await getCoinData(symbol);
-        updateCoin(data);
+        if (data) updateCoin(data);
     }, [updateCoin]);
 
     return(

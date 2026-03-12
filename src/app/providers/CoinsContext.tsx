@@ -16,7 +16,7 @@ export const CoinsProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const loadInitial = async () => {
             const doge = await getCoinData('DOGE');
-            setCoins([doge]);
+            if (doge) setCoins([doge]);
         };
         loadInitial();
     }, []);

@@ -1,17 +1,16 @@
 import NavBar from '@/widgets/navbar/NavBar'
 import refresh from '@/shared/icons/refresh.svg'
-import './Main.css'
+import styles from './Main.module.css'
 import '@/app/styles/index.css'
 import Table from '@/widgets/table/Table'
-import { useCoins } from '@/app/providers/CoinsContext'
 import CoinRow from '@/widgets/coinrow/CoinRow'
+import { CoinRowMode } from '@/widgets/coinrow/types'
 import { useCoinData } from '../model/useCoinData'
 import { getCoinData } from '@/shared/api/cryptoApi'
 import { useCallback } from 'react'
 
 const Main = () => {
-    const { coins, removeCoin, updateCoin } = useCoins();
-    const { countDown, fetchAllCoins } = useCoinData();
+    const { coins, removeCoin, updateCoin, countDown, fetchAllCoins } = useCoinData();
 
     const handleRefresh = useCallback(async (symbol: string) => {
         const data = await getCoinData(symbol);
@@ -20,16 +19,16 @@ const Main = () => {
 
     return(
         <div className="container">
-            <header className="header">
+            <header className={styles.header}>
                 <NavBar/>
             </header>
-            <main className='main'>
-                <div className="main__content">
-                    <div className="main__options">
+            <main className={styles.main}>
+                <div>
+                    <div className={styles.mainOptions}>
                         <h2>Trending Coins</h2>
-                        <div className="main__refresh">
+                        <div className={styles.mainRefresh}>
                             <span>Auto-refresh in {countDown}</span>
-                            <button className='refresh__button' onClick={fetchAllCoins}><img src={refresh} alt="Refresh" />Update All</button>
+                            <button className={styles.refreshButton} onClick={fetchAllCoins}><img src={refresh} alt="Refresh" />Update All</button>
                         </div>
                     </div>
                     <Table>
@@ -37,7 +36,7 @@ const Main = () => {
                             <CoinRow
                                 key={coin.symbol}
                                 coin={coin}
-                                mode='manage'
+                                mode={CoinRowMode.Manage}
                                 onRefresh={() => handleRefresh(coin.symbol)}
                                 onDelete={() => removeCoin(coin.symbol)}
                             />

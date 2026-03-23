@@ -1,6 +1,6 @@
 import search from '@/shared/icons/search.svg'
 import back from '@/shared/icons/back.svg'
-import './NavBar.css'
+import styles from './NavBar.module.css'
 import { useNavigate } from 'react-router-dom'
 
 type NavBarProps = {
@@ -15,18 +15,19 @@ type NavBarProps = {
 const NavBar = ({ title = 'Dashboard', subtitle = 'Track your crypto investments', showSearchInput = false, showBackButon = false, onSearchChange, onSearchSubmit }: NavBarProps) => {
     const navigate = useNavigate();
     return(
-        <nav className="nav">
-            <div className={`nav__content ${showSearchInput ? 'nav__content--column' : ''}`}>                <div className="nav__header">
+        <nav>
+            <div className={`${styles.navContent} ${showSearchInput ? styles.navContentColumn : ''}`}>
+                <div className={styles.navHeader}>
                     {showBackButon && (
-                        <button className='back__btn' onClick={() => navigate(-1)}><img src={back} alt="Back" /></button>
+                        <button className={styles.backBtn} onClick={() => navigate(-1)}><img src={back} alt="Back" /></button>
                     )}
-                    <div className="nav__info">
+                    <div className={styles.navInfo}>
                         <h1>{title}</h1>
                         <p>{subtitle}</p>
                     </div>
                 </div>
                 {showSearchInput?(
-                    <div className="nav__search">
+                    <div className={styles.navSearch}>
                         <img src={search} alt="Search" />
                         <input 
                             type="text" 
@@ -36,7 +37,7 @@ const NavBar = ({ title = 'Dashboard', subtitle = 'Track your crypto investments
                         />
                     </div>
                 ):(
-                    <button className="nav__search-btn" onClick={()=> navigate('/search')}>
+                    <button className={styles.navSearchBtn} onClick={()=> navigate('/search')}>
                         <img src={search} alt="Search" />
                     </button>
                 )}

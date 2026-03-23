@@ -1,4 +1,4 @@
-import './Table.css'
+import styles from './Table.module.css'
 import { memo } from 'react';
 
 type TableProps = {
@@ -8,7 +8,7 @@ type TableProps = {
 const Table = memo(({children}: TableProps) =>{
 
     return(
-        <table className='table'>
+        <table className={styles.table}>
             <thead>
                 <tr>
                     <td>Coin</td>

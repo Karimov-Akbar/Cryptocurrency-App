@@ -1,0 +1,85 @@
+.coinInfo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.coinInfo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.coinName {
+    display: flex;
+    flex-direction: column;
+}
+
+.coinName h3 {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--text-1);
+}
+
+.coinName p {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--text-3);
+}
+
+.positive {
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 150%;
+    text-align: center;
+    padding: 4px 10px;
+    display: inline-block;
+    background: var(--positive-bg);
+    color: var(--green);
+}
+
+.negative {
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 150%;
+    text-align: center;
+    padding: 4px 10px;
+    display: inline-block;
+    background: var(--negative-bg);
+    color: var(--negative-color);
+}
+
+.options {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.options button {
+    cursor: pointer;
+    border: 0.93px solid var(--border-light);
+    border-radius: 10px;
+    padding: 6px 8px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.options button:hover {
+    background: var(--hover-bg);
+}
+
+.options button img {
+    width: 18px;
+    height: 18px;
+}
+
+.options button:first-child img {
+    filter: invert(46%) sepia(5%) saturate(498%) hue-rotate(169deg) brightness(93%) contrast(89%);
+}

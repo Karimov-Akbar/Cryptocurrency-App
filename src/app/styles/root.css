@@ -10,9 +10,16 @@
 	--green: #21bf73;
 	--red: #d90429;
 	--border-color: #dfe2e4;
+	--border-light: #e5e7eb;
 	--blue-sec: #ecf4ff;
 	--red-sec: #ffebee;
 	--green-sec: #dcf9eb;
 	--dark-blue: #005be3;
 	--bg-blue: #203ed6;
+	--hover-bg: #f3f4f6;
+	--border-table: #f3f4f6;
+	--placeholder-color: #adb5bd;
+	--negative-bg: #fde8e8;
+	--negative-color: #ef4444;
+	--positive-bg: #e8f8f0;
 }

@@ -4,7 +4,7 @@ import { getCoinData } from '@/shared/api/cryptoApi';
 import { useCoins } from '@/app/providers/CoinsContext';
 
 export const useCoinData = () => {
-    const { coins, updateCoin } = useCoins();
+    const { coins, removeCoin, updateCoin } = useCoins();
     const [countDown, setCountDown] = useState(10);
 
     const fetchAllCoins = useCallback(async () => {
@@ -28,5 +28,5 @@ export const useCoinData = () => {
         };
     }, [fetchAllCoins]);
 
-    return { countDown, fetchAllCoins };
+    return { coins, removeCoin, updateCoin, countDown, fetchAllCoins };
 };
